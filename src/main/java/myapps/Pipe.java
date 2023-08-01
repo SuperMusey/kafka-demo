@@ -29,7 +29,7 @@ public class Pipe {
         //Kafka source stream from topic
         KStream<String, String> source = builder.stream("streams-plaintext-input");
         //write to another Kafka topic
-        source.to("streams-pipe-output");
+        source.to("streams-wordcount-output");
 
         //Print Topology
         final Topology topology = builder.build();

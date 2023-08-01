@@ -31,11 +31,11 @@ public class WordCount {
                 .groupBy((key,value)->value)
                 .count(Materialized.<String, Long, KeyValueStore<Bytes,byte[]>>as("counts-store"))
                 .toStream()
-                .to("streams-pipe-output", Produced.with(Serdes.String(),Serdes.Long()));
+                .to("streams-wordcount-output", Produced.with(Serdes.String(),Serdes.Long()));
 
         //Get and print Topology
         final Topology topology = builder.build();
-        System.out.println(topology.describe());
+        //System.out.println(topology.describe());
 
         //Construct streams client
         final KafkaStreams streams = new KafkaStreams(topology,props);
